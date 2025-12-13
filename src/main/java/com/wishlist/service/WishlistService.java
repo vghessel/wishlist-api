@@ -1,6 +1,8 @@
 package com.wishlist.service;
 
 import com.wishlist.domain.Wishlist;
+import com.wishlist.exception.WishlistLimitExceededException;
+import com.wishlist.exception.WishlistNotFoundException;
 import com.wishlist.repository.WishlistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,19 +19,13 @@ public class WishlistService {
 
     public Wishlist getWishlist(String customerId) {
         return wishlistRepository.findById(customerId)
-                .orElseThrow(() ->
-                        new WishlistNotFoundException(customerId)
-                );
+                .orElseThrow(() -> new WishlistNotFoundException(customerId));
     }
 
     public boolean containsProduct(String customerId, String productId) {
-        Wishlist wishlist = wishlistRepository.findById(customerId)
-                .orElseThrow(() ->
-                        new WishlistNotFoundException(customerId)
-                );
+        Wishlist wishlist = getWishlist(customerId);
         return wishlist.getProductIds().contains(productId);
     }
-
 
     public void addProduct(String customerId, String productId) {
         Wishlist wishlist = wishlistRepository
@@ -61,11 +57,8 @@ public class WishlistService {
             return;
         }
 
-        if (!wishlist.getProductIds().contains(productId)) {
-            return;
+        if (wishlist.getProductIds().remove(productId)) {
+            wishlistRepository.save(wishlist);
         }
-
-        wishlist.getProductIds().remove(productId);
-        wishlistRepository.save(wishlist);
     }
 }
