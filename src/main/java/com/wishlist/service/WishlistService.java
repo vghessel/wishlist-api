@@ -22,6 +22,16 @@ public class WishlistService {
                 );
     }
 
+    public boolean containsProduct(String customerId, String productId) {
+        Wishlist wishlist = wishlistRepository.findById(customerId)
+                .orElseThrow(() ->
+                        new WishlistNotFoundException(customerId)
+                );
+
+        return wishlist.getProductIds().contains(productId);
+    }
+
+
     public void addProduct(String customerId, String productId) {
         Wishlist wishlist = wishlistRepository
                 .findById(customerId)

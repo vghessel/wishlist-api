@@ -20,6 +20,11 @@ public class WishlistController {
         return new WishlistResponseDTO(wishlist.getCustomerId(), wishlist.getProductIds());
     }
 
+    @GetMapping("/{customerId}/products/{productId}")
+    public boolean containsProduct(@PathVariable String customerId, @PathVariable String productId) {
+        return wishlistService.containsProduct(customerId, productId);
+    }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping("/{customerId}/products/{productId}")
     public void addProduct(@PathVariable String customerId, @PathVariable String productId) {
