@@ -27,7 +27,6 @@ public class WishlistService {
                 .orElseThrow(() ->
                         new WishlistNotFoundException(customerId)
                 );
-
         return wishlist.getProductIds().contains(productId);
     }
 
