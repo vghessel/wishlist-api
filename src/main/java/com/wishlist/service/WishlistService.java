@@ -15,6 +15,13 @@ public class WishlistService {
 
     private static final int MAX_PRODUCTS = 20;
 
+    public Wishlist getWishlist(String customerId) {
+        return wishlistRepository.findById(customerId)
+                .orElseThrow(() ->
+                        new WishlistNotFoundException(customerId)
+                );
+    }
+
     public void addProduct(String customerId, String productId) {
         Wishlist wishlist = wishlistRepository
                 .findById(customerId)
