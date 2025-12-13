@@ -5,10 +5,12 @@ import com.wishlist.exception.WishlistLimitExceededException;
 import com.wishlist.exception.WishlistNotFoundException;
 import com.wishlist.repository.WishlistRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class WishlistService {
@@ -18,16 +20,19 @@ public class WishlistService {
     private static final int MAX_PRODUCTS = 20;
 
     public Wishlist getWishlist(String customerId) {
+        log.debug("Fetching wishlist for customerId = {}", customerId);
         return wishlistRepository.findById(customerId)
                 .orElseThrow(() -> new WishlistNotFoundException(customerId));
     }
 
     public boolean containsProduct(String customerId, String productId) {
+        log.debug("Checking if productId = {} exists in wishlist for customerId = {}", productId, customerId);
         Wishlist wishlist = getWishlist(customerId);
         return wishlist.getProductIds().contains(productId);
     }
 
     public void addProduct(String customerId, String productId) {
+        log.debug("Adding productId = {} to wishlist for customerId = {}", productId, customerId);
         Wishlist wishlist = wishlistRepository
                 .findById(customerId)
                 .orElseGet(() -> Wishlist.builder()
@@ -36,6 +41,7 @@ public class WishlistService {
                         .build());
 
         if (wishlist.getProductIds().contains(productId)) {
+            log.debug("ProductId = {} already exists in wishlist for customerId = {}", productId, customerId);
             return;
         }
 
@@ -45,20 +51,27 @@ public class WishlistService {
 
         wishlist.getProductIds().add(productId);
         wishlistRepository.save(wishlist);
+
+        log.debug("ProductId = {} added to wishlist for customerId = {}", productId, customerId);
     }
 
     public void removeProduct(String customerId, String productId) {
+        log.debug("Removing productId = {} from wishlist for customerId = {}", productId, customerId);
 
         Wishlist wishlist = wishlistRepository
                 .findById(customerId)
                 .orElse(null);
 
         if (wishlist == null) {
+            log.debug("Wishlist not found for customerId = {}, nothing to remove", customerId);
             return;
         }
 
         if (wishlist.getProductIds().remove(productId)) {
             wishlistRepository.save(wishlist);
+            log.debug("ProductId = {} removed from wishlist for customerId = {}", productId, customerId);
+        } else {
+            log.debug("ProductId = {} not found in wishlist for customerId = {}", productId, customerId);
         }
     }
 }
