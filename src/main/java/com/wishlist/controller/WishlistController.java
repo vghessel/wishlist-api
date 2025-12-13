@@ -17,4 +17,10 @@ public class WishlistController {
     public void addProduct(@PathVariable String customerId, @PathVariable String productId) {
         wishlistService.addProduct(customerId, productId);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{customerId}/products/{productId}")
+    public void removeProduct(@PathVariable String customerId, @PathVariable String productId) {
+        wishlistService.removeProduct(customerId, productId);
+    }
 }

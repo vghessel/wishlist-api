@@ -34,4 +34,22 @@ public class WishlistService {
         wishlist.getProductIds().add(productId);
         wishlistRepository.save(wishlist);
     }
+
+    public void removeProduct(String customerId, String productId) {
+
+        Wishlist wishlist = wishlistRepository
+                .findById(customerId)
+                .orElse(null);
+
+        if (wishlist == null) {
+            return;
+        }
+
+        if (!wishlist.getProductIds().contains(productId)) {
+            return;
+        }
+
+        wishlist.getProductIds().remove(productId);
+        wishlistRepository.save(wishlist);
+    }
 }
