@@ -2,6 +2,7 @@ package com.wishlist.controller;
 
 import com.wishlist.domain.Wishlist;
 import com.wishlist.dto.WishlistProductRequest;
+import com.wishlist.dto.WishlistProductResponse;
 import com.wishlist.dto.WishlistResponse;
 import com.wishlist.service.WishlistService;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +25,11 @@ public class WishlistController {
         return new WishlistResponse(wishlist.getCustomerId(), wishlist.getProductIds());
     }
 
-    @GetMapping("/products")
-    public boolean containsProduct(WishlistProductRequest request) {
-        log.info("GET /wishlists/products with customerId = {} and productId = {}", request.customerId(), request.productId());
-        return wishlistService.containsProduct(request.customerId(), request.productId());
+    @GetMapping("/products/status")
+    public WishlistProductResponse containsProduct(WishlistProductRequest request) {
+        log.info("GET /wishlists/products/status with customerId = {} productId = {}", request.customerId(), request.productId());
+        boolean inWishlist = wishlistService.containsProduct(request.customerId(), request.productId());
+        return new WishlistProductResponse(request.customerId(), request.productId(), inWishlist);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
