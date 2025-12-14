@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
@@ -16,6 +17,9 @@ import java.util.Set;
 public class Wishlist {
 
     @Id
+    private String wishlistId;
+
+    @Indexed
     private String customerId;
 
     private Set<String> productIds;

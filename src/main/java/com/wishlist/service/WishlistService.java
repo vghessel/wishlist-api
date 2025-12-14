@@ -21,7 +21,7 @@ public class WishlistService {
 
     public Wishlist getWishlist(String customerId) {
         log.debug("Fetching wishlist for customerId = {}", customerId);
-        return wishlistRepository.findById(customerId)
+        return wishlistRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new WishlistNotFoundException(customerId));
     }
 
@@ -34,7 +34,7 @@ public class WishlistService {
     public void addProduct(String customerId, String productId) {
         log.debug("Adding productId = {} to wishlist for customerId = {}", productId, customerId);
         Wishlist wishlist = wishlistRepository
-                .findById(customerId)
+                .findByCustomerId(customerId)
                 .orElseGet(() -> Wishlist.builder()
                         .customerId(customerId)
                         .productIds(new HashSet<>())
@@ -59,7 +59,7 @@ public class WishlistService {
         log.debug("Removing productId = {} from wishlist for customerId = {}", productId, customerId);
 
         Wishlist wishlist = wishlistRepository
-                .findById(customerId)
+                .findByCustomerId(customerId)
                 .orElse(null);
 
         if (wishlist == null) {
