@@ -19,7 +19,7 @@ public class Wishlist {
     @Id
     private String wishlistId;
 
-    @Indexed
+    @Indexed(unique = true)
     private String customerId;
 
     private Set<String> productIds;
