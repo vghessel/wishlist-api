@@ -1,7 +1,5 @@
 # Wishlist API
 
----
-
 ## Funcionalidades
 
 * Criar wishlist automaticamente ao adicionar o primeiro produto
@@ -61,6 +59,33 @@ src
              ├── controller      # Testes unitários (JUnit)
              ├── repository      # Testes integrados (Testcontainers)
              └── service         # Testes unitários (Spock)
+```
+
+---
+
+## Documentação da API (Swagger/OpenAPI)
+
+A documentação da API é gerada automaticamente pelo SpringDoc.
+
+### **Acessar a interface Swagger UI**
+```
+http://localhost:8080/swagger-ui.html
+```
+
+ou
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+### **OpenAPI JSON**
+```
+http://localhost:8080/v3/api-docs
+```
+
+### **OpenAPI YAML**
+```
+http://localhost:8080/v3/api-docs.yaml
 ```
 
 ---
@@ -133,6 +158,12 @@ Incluem:
 * Testes de repositório com **MongoDB real** via Testcontainers
 
 Executar:
+
+```bash
+mvn test -Dtest=*IT
+```
+
+ou
 
 ```bash
 mvn verify
