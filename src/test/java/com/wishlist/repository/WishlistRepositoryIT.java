@@ -38,7 +38,6 @@ class WishlistRepositoryIT {
 
     @Test
     void shouldFindWishlistByCustomerId() {
-        // given
         Wishlist wishlist = Wishlist.builder()
                 .customerId("123")
                 .productIds(Set.of("456", "789"))
@@ -46,20 +45,17 @@ class WishlistRepositoryIT {
 
         wishlistRepository.save(wishlist);
 
-        // when
         var result = wishlistRepository.findByCustomerId("123");
 
-        // then
         assertThat(result).isPresent();
         assertThat(result.get().getProductIds()).hasSize(2);
     }
 
     @Test
     void shouldReturnEmptyWhenCustomerDoesNotExist() {
-        // when
+
         var result = wishlistRepository.findByCustomerId("999");
 
-        // then
         assertThat(result).isEmpty();
     }
 }
