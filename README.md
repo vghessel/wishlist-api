@@ -1,9 +1,5 @@
 # Wishlist API
 
-API REST responsável por gerenciar **Wishlists de clientes**, permitindo adicionar, remover, consultar produtos e verificar se um produto está presente na wishlist.
-
-O projeto foi pensado para ser **simples de rodar**, **fácil de avaliar** e seguindo **boas práticas modernas** de desenvolvimento backend com Java e Spring.
-
 ---
 
 ## Funcionalidades
@@ -105,6 +101,7 @@ Isso irá subir:
 
 * Usuário: `dev`
 * Senha: `dev`
+* Database: `admin`
 
 ---
 
