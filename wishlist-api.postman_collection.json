@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "9b4ff723-312f-42ac-b55c-95aa3c4f7c14",
+		"name": "Wishlist API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24676685",
+		"_collection_link": "https://software-4662.postman.co/workspace/Projects~7ea2aa78-b5fb-47cf-a386-02a5459dee66/collection/24676685-9b4ff723-312f-42ac-b55c-95aa3c4f7c14?action=share&source=collection_link&creator=24676685"
+	},
+	"item": [
+		{
+			"name": "Get Wishlist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/wishlists?customerId=123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wishlists"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Product in Wishlist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/wishlists/products/status?customerId=123&productId=456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wishlists",
+						"products",
+						"status"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "123"
+						},
+						{
+							"key": "productId",
+							"value": "456"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product in Wishlist",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/wishlists/products?customerId=123&productId=456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wishlists",
+						"products"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "123"
+						},
+						{
+							"key": "productId",
+							"value": "456"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product in Wishlist",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/wishlists/products?customerId=123&productId=456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wishlists",
+						"products"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "123"
+						},
+						{
+							"key": "productId",
+							"value": "456"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
